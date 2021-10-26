@@ -106,33 +106,72 @@ const fontIcons = [
     }
 ]
 
+
+const container = document.querySelector('.cards')
+
+document.getElementById('filtro').addEventListener('change', changeSelect);
+
+function changeSelect() {
+    let valoreSelect = document.getElementById('filtro').value;
+    //console.log(valoreSelect);
+
+    container.innerHTML = '';
+
+    let tipoFiltro = '';
+    if (valoreSelect == 'animals') {
+        tipoFiltro = 'animals'
+        createElements()
+    } else if (valoreSelect == 'vegetables') {
+        tipoFiltro = 'vegetables'
+        createElements()
+    } else if (valoreSelect == 'user') {
+        tipoFiltro = 'user'
+        createElements()
+    } else {
+        tipoFiltro = 'all'
+        createElements()
+    }
+
+    console.log(valoreSelect);
+    console.log(tipoFiltro);
+
+
+}
+
+/* let tipoFiltro = valoreSelect
+console.log(tipoFiltro); */
+
 const colors = [
     'orange',
     'blue',
     'purple'
 ]
 
+function createElements() {
 
-const container = document.querySelector('.cards')
+    fontIcons.forEach((icon) => {
 
-fontIcons.forEach((icon) => {
+        let color = '';
 
-    let colors = '';
+        if (icon.type == 'vegetable') {
+            color = 'orange'
+        } else if (icon.type == 'animal') {
+            color = 'blue'
+        } else if (icon.type == 'user') {
+            color = 'purple'
+        }
 
-    if (icon.type == 'vegetable') {
-        color = 'orange'
-    } else if (icon.type == 'animal') {
-        color = 'blue'
-    } else if (icon.type == 'user') {
-        color = 'purple'
-    }
+        const elementHTML = `
+        <div class="card">
+            <i class="${icon.family} ${icon.prefix}${icon.name} fa-lg" style="color:${color} "></i>
+            <span>${icon.name.toUpperCase()}</span>
+        </div>
+        `
 
-    const elementHTML = `
-    <div class="card">
-        <i class="${icon.family} ${icon.prefix}${icon.name} fa-lg" style="color:${color} "></i>
-        <span>${icon.name.toUpperCase()}</span>
-    </div>
-    `
+        container.innerHTML += elementHTML;
+    })
 
-    container.innerHTML += elementHTML;
-})
+    return icon.type
+}
+
+
