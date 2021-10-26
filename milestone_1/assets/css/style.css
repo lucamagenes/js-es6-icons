@@ -3,3 +3,20 @@
     margin: 0;
     box-sizing: border-box;
 }
+
+.cards {
+    justify-content: space-between;
+}
+
+.card {
+    width: 200px;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px #8d8d8d;
+}
+
+.card i {
+    font-size: 30px;
+}
