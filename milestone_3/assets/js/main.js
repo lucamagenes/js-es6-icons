@@ -109,69 +109,37 @@ const fontIcons = [
 
 const container = document.querySelector('.cards')
 
-document.getElementById('filtro').addEventListener('change', changeSelect);
+const select = document.getElementById('filtro')
 
-function changeSelect() {
-    let valoreSelect = document.getElementById('filtro').value;
-    //console.log(valoreSelect);
+select.addEventListener('change', function () {
 
     container.innerHTML = '';
 
-    let tipoFiltro = '';
-    if (valoreSelect == 'animals') {
-        tipoFiltro = 'animals'
-        createElements()
-    } else if (valoreSelect == 'vegetables') {
-        tipoFiltro = 'vegetables'
-        createElements()
-    } else if (valoreSelect == 'user') {
-        tipoFiltro = 'user'
-        createElements()
-    } else {
-        tipoFiltro = 'all'
-        createElements()
-    }
-
-    console.log(valoreSelect);
-    console.log(tipoFiltro);
-
-
-}
-
-/* let tipoFiltro = valoreSelect
-console.log(tipoFiltro); */
-
-const colors = [
-    'orange',
-    'blue',
-    'purple'
-]
-
-function createElements() {
 
     fontIcons.forEach((icon) => {
 
-        let color = '';
+        if (select.value == icon.type || select.value == "all") {
 
-        if (icon.type == 'vegetable') {
-            color = 'orange'
-        } else if (icon.type == 'animal') {
-            color = 'blue'
-        } else if (icon.type == 'user') {
-            color = 'purple'
+            let color = '';
+
+            if (icon.type == 'vegetable') {
+                color = 'orange'
+            } else if (icon.type == 'animal') {
+                color = 'blue'
+            } else if (icon.type == 'user') {
+                color = 'purple'
+            }
+
+            const elementHTML = `
+                <div class="card">
+                    <i class="${icon.family} ${icon.prefix}${icon.name} fa-lg" style="color:${color} "></i>
+                    <span>${icon.name.toUpperCase()}</span>
+                </div>
+                `
+
+            container.innerHTML += elementHTML;
         }
 
-        const elementHTML = `
-        <div class="card">
-            <i class="${icon.family} ${icon.prefix}${icon.name} fa-lg" style="color:${color} "></i>
-            <span>${icon.name.toUpperCase()}</span>
-        </div>
-        `
-
-        container.innerHTML += elementHTML;
     })
-
-    return icon.type
-}
-
+});
 
